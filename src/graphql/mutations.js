@@ -33,13 +33,12 @@ const register = {
 
 const login = {
 	type: GraphQLString,
-	description: "Log in a user that exists in the database",
+	description: "Authenticate a user",
 	args: {
 		email: { type: GraphQLString },
 		password: { type: GraphQLString },
 	},
 	async resolve(parent, args) {
-		const { email, password } = args;
 		const user = await User.findOne({ email }).exec();
 		if (!user) {
 			throw new Error("User not found");
